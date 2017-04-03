@@ -1,0 +1,8 @@
+#include <stdio.h>
+
+int main(int argc, char** argv) {
+
+printf("no me acuerdo como programar en C, esto es un ejemplo xD");
+
+return 0;
+}
