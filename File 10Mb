@@ -1,0 +1,12 @@
+#include <stdio.h>
+
+int main(void) {
+        int X = 1024 * 1024 * 10 - 1;
+        
+        FILE *fp = fopen("myfile", "w");
+        fseek(fp, X , SEEK_SET);
+        fputc('\0', fp);
+        fclose(fp);
+}
+//Esto deberia crear un archivo de 10Mb (a mi me crea uno de 10.5Mb)
+//lo crea por defecto en la misma carpeta donde esta el .c (en mi caso /home/felipe/NetBeansProjects/*nombre del proyecto*)
