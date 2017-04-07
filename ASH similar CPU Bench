@@ -1,0 +1,26 @@
+
+#Este programa es similar al CPU Benchmark en el sentido de que se le indica ir desde 1 hasta 5000 en este caso
+#y en cada numero que se encuentre dividirlo por todos sus antecesores hasta llegar a 1.
+
+#Esta escrito en el lenguaje "ASH" que es similar a Bash pero un poco mas viejo.. creo..
+
+
+
+#!/bin/sh
+
+M=500
+#X=0
+I=0
+
+while [ "$I" -lt "$M" ]
+do
+I=`expr $I + 1`
+X=$I
+
+        while [ "$X" -gt "0" ]
+        do
+        N=`expr $M / $X`
+        X=`expr $X - 1`
+        done
+echo "me encuentro en $I"
+done
