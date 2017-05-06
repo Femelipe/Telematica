@@ -45,3 +45,53 @@
      free(c);
      return 0;
  }
+
+
+------------------------------------
+//ACTUALIZADO: Un proceso mucho mas liviano, repetido muchas veces para generar mas trabajo
+//Actualmente, el programa actualizado de RAM (que crea los vectores de tama;o 900.000 y repite el proceso 500 veces (esto ultimo no influye)) ocupa el 0,5% de mi RAM
+//Cuentas: RAM = ((PC Ram=)4978788 * 0,005) / 1000 = 25Mb de RAM aprox
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+static size_t MM = 900000;
+
+void add(double *a, double *b, double *c, size_t n) {
+    size_t i;
+    for (i = 0; i < n; ++i) {
+        c[i] = a[i] + b[i];
+    }
+}
+
+int main() {
+    double *a, *b, *c;
+    size_t i;
+    clock_t start, end;
+    double diffs;
+    int j;
+    for (j = 0; j < 500; j++) {
+        a = (double *) malloc(MM * sizeof (double));
+        b = (double *) malloc(MM * sizeof (double));
+        c = (double *) malloc(MM * sizeof (double));
+
+        for (i = 0; i < MM; ++i) {
+            a[i] = 1.0 / (double) (i + 1);
+            b[i] = a[i];
+        }
+
+        start = clock();
+        add(a, b, c, MM);
+        end = clock();
+        diffs = (end - start) / (double) CLOCKS_PER_SEC;
+
+
+        free(a);
+        free(b);
+        free(c);
+    }
+    printf("time = %lf\n", diffs);
+    return 0;
+}
