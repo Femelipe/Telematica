@@ -67,11 +67,16 @@ void add(double *a, double *b, double *c, size_t n) {
 }
 
 int main() {
+    int clocks = 1000000;
+    
     double *a, *b, *c;
     size_t i;
     clock_t start, end;
     double diffs;
+    float cpu_time_used;
+    
     int j;
+        start = clock();
     for (j = 0; j < 500; j++) {
         a = (double *) malloc(MM * sizeof (double));
         b = (double *) malloc(MM * sizeof (double));
@@ -82,16 +87,16 @@ int main() {
             b[i] = a[i];
         }
 
-        start = clock();
         add(a, b, c, MM);
-        end = clock();
-        diffs = (end - start) / (double) CLOCKS_PER_SEC;
+        diffs = (end - start) / (double) clocks;
 
 
         free(a);
         free(b);
         free(c);
     }
-    printf("time = %lf\n", diffs);
+        end = clock();
+        cpu_time_used = ((float) (end - start)/clocks); // CLOCKS_PER_SEC;
+    printf("time = %f s\n", cpu_time_used);
     return 0;
 }
