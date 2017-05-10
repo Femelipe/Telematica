@@ -52,12 +52,13 @@
 //Actualmente, el programa actualizado de RAM (que crea los vectores de tama;o 900.000 y repite el proceso 500 veces (esto ultimo no influye)) ocupa el 0,5% de mi RAM
 //Cuentas: RAM = ((PC Ram=)4978788 * 0,005) / 1000 = 25Mb de RAM aprox
 
+//EDITADO: baje el tama;o a 180000 (900000/5) asi come unicamente 5Mb de RAM, ya que el router tiene disponibles unicamente 8Mb mientras se encuentra en funcionamiento
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-static size_t MM = 900000;
+static size_t MM = 180000;
 
 void add(double *a, double *b, double *c, size_t n) {
     size_t i;
@@ -77,7 +78,7 @@ int main() {
     
     int j;
         start = clock();
-    for (j = 0; j < 500; j++) {
+    for (j = 0; j < 1000; j++) {
         a = (double *) malloc(MM * sizeof (double));
         b = (double *) malloc(MM * sizeof (double));
         c = (double *) malloc(MM * sizeof (double));
